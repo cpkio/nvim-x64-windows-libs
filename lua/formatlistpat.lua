@@ -1,26 +1,26 @@
 -- ^\\s*\\%(\\(-\\|\\*\\|#\\)\\|\\(\\C\\%(\\d\\+)\\|\\d\\+\\.\\|[ivxlcdm]\\+)\\|[IVXLCDM]\\+)\\|\\l\\{1,2})\\|\\u\\{1,2})\\)\\)\\)\\s\\+\\%(\\[\\([ ¼½¾X-]\\)\\]\\s\\)\\?
 
-function string:flp_start()
+function string:on()
   return self .. "\\_^\\s*"
 end
 
-function string:flp_end()
+function string:off()
   return self .. "\\s\\+"
 end
 
-function string:flp_sep()
+function string:separator()
   return self .. [[\|]]
 end
 
-function string:flp_group(pattern)
+function string:group(pattern)
   return self .. "\\%(" .. pattern .. "\\)"
 end
 
-function string:flp_bullet()
+function string:bullets()
   return self .. [[\%(-\|\*\|\#\|—\|·\|•|‣\)]]
 end
 
-function string:flp_numlist()
+function string:numlist()
   return self .. [[\d\+\%(\.\d\+\)*\.\|\d\+)\|\d\+\.]]
   -- \(
   --  \C\%(
@@ -34,6 +34,10 @@ function string:flp_numlist()
   -- \)
 end
 
-function string:flp_alphalist()
+function string:alphalist()
   return self .. [[[абвгдежзиклмнопрстуфхцчшщэюя])]]
+end
+
+function string:section()
+  return self .. [[[A-ZА-Я]\+\([-_#]\(\d\|[A-Z]\|_\|?\|\*\)\)\+\.]]
 end
